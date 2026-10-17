@@ -11,8 +11,8 @@ from flask import Flask
 
 # Импортируем основные классы из библиотеки aiogram для создания бота
 from aiogram import Bot, Dispatcher, F
-# Импортируем типы данных Telegram: Сообщение, Коллбэк (нажатие кнопки), Инлайн-клавиатура и Инлайн-кнопка
-from aiogram.types import Message, CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton
+# Импортируем типы данных Telegram + LinkPreviewOptions для отключения огромных плашек со ссылками
+from aiogram.types import Message, CallbackQuery, InlineKeyboardMarkup, InlineKeyboardButton, LinkPreviewOptions
 # Импортируем ParseMode для указания того, что мы используем HTML разметку (жирный текст, ссылки и т.д.)
 from aiogram.enums import ParseMode
 # Импортируем настройки бота по умолчанию (чтобы применить HTML ко всем сообщениям)
@@ -144,10 +144,11 @@ async def approve_post(callback: CallbackQuery):
         # Приклеиваем подпись
         final_text = original_text + SIGNATURE
         
-        # Отправляем в канал текстовое сообщение
+        # Отправляем в канал текстовое сообщение и ОТКЛЮЧАЕМ ПРЕВЬЮ ССЫЛОК
         await bot.send_message(
             chat_id=CHANNEL_ID,
-            text=final_text
+            text=final_text,
+            link_preview_options=LinkPreviewOptions(is_disabled=True)
         )
         # Меняем текст у админа, убирая кнопки
         await callback.message.edit_text(text="<i>✅ Опубликовано в канал!</i>")
