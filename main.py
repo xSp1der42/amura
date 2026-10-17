@@ -29,14 +29,12 @@ BOT_TOKEN = os.getenv("BOT_TOKEN")
 ADMIN_ID = int(os.getenv("ADMIN_ID"))
 # Достаем ID канала (строка, обычно начинается с минуса, например -10012345678)
 CHANNEL_ID = os.getenv("CHANNEL_ID")
-# Достаем ссылку на чат (строка)
-CHAT_LINK = os.getenv("CHAT_LINK")
 # Достаем ссылку на самого бота (строка)
 BOT_LINK = os.getenv("BOT_LINK")
 
 # Формируем подпись, которая будет автоматически добавляться к каждому опубликованному посту.
-# Используем HTML-тег <a> для создания кликабельных гиперссылок.
-SIGNATURE = f"\n\n<a href='{CHAT_LINK}'>✅ Наш чат</a>\n<a href='{BOT_LINK}'>✅ Предложить новость</a>"
+# Тег <a> создает ссылку, а тег <b> делает текст внутри него ЖИРНЫМ.
+SIGNATURE = f"\n\n<b><a href='https://t.me/kaza1n'>✅ Ищу тебя Казань</a></b>\n<b><a href='{BOT_LINK}'>✅ Предложить новость</a></b>"
 
 # Инициализируем объект бота. Передаем ему токен и указываем, что по умолчанию весь текст будет в HTML.
 bot = Bot(token=BOT_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
